@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h2>Souhait {{ souhait.title }} [{{ souhait.category.name }}]</h2>
+    <p class="wish-credit">Créé par l'utilisateur {{ souhait.author }} à la date suivante : {{ souhait.dateCreated | date("Y-m-d") }}</p>
+    <p>{{ souhait.description | nl2br }}</p>
+
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | {{ souhait.title }}
+{% endblock %}
+

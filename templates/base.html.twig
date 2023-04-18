@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Bucket-list{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@700&display=swap" rel="stylesheet">
+
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    {% endblock stylesheets %}
+
+    <link rel="shortcut icon" href="{{ asset('img/favicon.png')}}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <h1 class="header-logo"><a href="{{ path('main_home') }}"><img src="{{ asset('img/logo.png') }}" alt="Bucklet-List"></a>Bucklet-List</h1>
+                <nav class="user-nav">
+                        {% if app.user %}
+                            <a href="{{ path('app_logout') }}" title="Logout">Logout (Hello {{ app.user.userIdentifier }} !)</a>
+                        {% else %}
+                            <a href="{{ path('app_register') }}" title="Register">Register</a>
+                            <a href="{{ path('app_login') }}" title="login">Login</a>
+                        {% endif %}
+                </nav>
+            </div>
+            <nav class="header-nav">
+                    <a href="{{ path('main_home') }}" title="Home">Home</a>
+                    <a href="{{ path('wish_list') }}" title="AllWishes">All wishes</a>
+                    {% if app.user %}
+                    <a href="{{ path('wish_addyours') }}" title="AddYours">Add Yours !</a>
+                    {% endif %}
+                    <a href="{{ path('main_aboutUs') }}" title="AboutUs">About us</a>
+            </nav>
+        </div>
+    </header>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}"> {{ message }} </div>
+        {% endfor %}
+    {% endfor %}
+
+    <main>
+        <div class="container">
+            {% block main %}{% endblock %}
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">&copy; Bucklet-List {{ "now"|date('Y') }}</div>
+    </footer>
+
+</body>
+</html>

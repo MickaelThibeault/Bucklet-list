@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | Wishes list
+{% endblock %}
+
+{% block main %}
+<section class="wishes-list">
+    <h2>All wishes !</h2>
+
+    {% for souhait in souhaits %}
+        <article>
+            <a href="{{ path('wish_detail', {id : souhait.id}) }}" title="{{ souhait.title }}">{{ souhait.title }} [{{ souhait.category.name }}]</a>
+        </article>
+    {% endfor %}
+
+</section>
+
+{% endblock %}
